@@ -17,7 +17,7 @@ public class UserRepository extends JDBConnection {
 	public int insert(User user) {
 	int result = 0;		// 결과 : 적용된 데이터 건수
 		
-		String sql = " INSERT INTO users (id, password, name, gender, birth, mail, phone, address) "
+		String sql = " INSERT INTO user (id, password, name, gender, birth, mail, phone, address) "
 				   + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
@@ -36,6 +36,7 @@ public class UserRepository extends JDBConnection {
 												// 				실패 시, result : 0
 			// executeUpdate()
 			// : SQL (INSERT, UPDATE, DELETE)을 실행하고 적용된 데이터 개수를 int 타입으로 반환
+			System.out.println("로그인성공");
 		} catch (SQLException e) {	
 			System.err.println("회원가입시 시, 예외 발생");
 			e.printStackTrace();
@@ -161,7 +162,7 @@ public class UserRepository extends JDBConnection {
 	        	persistentLogin.setpNo( rs.getInt("p_no")); 
 	        	persistentLogin.setUserId( rs.getString("user_id") ); 
 	        	persistentLogin.setToken( rs.getString("token") ); 
-	        	persistentLogin.setDate( rs.getTimestamp("token") ); 
+	        	persistentLogin.setDate( rs.getTimestamp("date") ); 
 	        }
 	        rs.close();
 	    } catch (SQLException e) {
@@ -276,20 +277,3 @@ public class UserRepository extends JDBConnection {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

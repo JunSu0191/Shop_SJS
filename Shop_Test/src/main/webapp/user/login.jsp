@@ -22,8 +22,6 @@
 		}
 		
 		// 아이디 저장 쿠키 가져오기
-			
-		// 아이디 저장
 		String rememberId = "";
 		String userId = "";
 		Cookie[] cookies = request.getCookies();

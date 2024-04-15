@@ -20,15 +20,12 @@
 		response.sendRedirect("login.jsp?msg=0");
 		return;
 	}
-	
 	// 로그인 성공
-	// 로그인 성공 페이지로 이동
 	// - 세션에 아이디 등록
 	String root = request.getContextPath();
 	if( loginUser != null) {
 		session.setAttribute("loginId", loginUser.getId() );
-		response.sendRedirect( root + "/complete.jsp");
-	}
+	}	
 	
 	// 아이디 저장
 		String rememberId = request.getParameter("rememberId");
@@ -86,7 +83,8 @@
 		response.addCookie(cookieToken);
 		// 자동 로그인(끝)
 	
-		// 쿠키 전달
+		// 로그인 성공 페이지로 이동
+		response.sendRedirect("complete.jsp?msg=0");
 	
 
 

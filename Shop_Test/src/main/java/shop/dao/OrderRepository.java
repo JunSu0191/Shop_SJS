@@ -15,6 +15,7 @@ public class OrderRepository extends JDBConnection {
 	 * @return
 	 */
 	public int insert(Order order) {
+		int result = 0;
 		
 	}
 
