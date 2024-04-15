@@ -1,6 +1,7 @@
 package shop.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
 	
@@ -18,7 +19,7 @@ public class User implements Serializable {
 	private String mail;
 	private String phone;
 	private String address;
-	private String registDay;
+	private Date registDay;
 	
 	public User() {
 		
@@ -88,12 +89,16 @@ public class User implements Serializable {
 		this.address = address;
 	}
 
-	public String getRegistDay() {
+	public Date getRegistDay() {
 		return registDay;
 	}
 
-	public void setRegistDay(String registDay) {
+	public void setRegistDay(Date registDay) {
 		this.registDay = registDay;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
@@ -102,6 +107,8 @@ public class User implements Serializable {
 				+ birth + ", mail=" + mail + ", phone=" + phone + ", address=" + address + ", registDay=" + registDay
 				+ "]";
 	}
+
+	
 	
 
 }
