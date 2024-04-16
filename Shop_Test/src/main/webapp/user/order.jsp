@@ -97,7 +97,7 @@
                         </div>
                     <% } %>
                     </form>
-                <% if( loginId != null || ( phone != null && !phone.isEmpty() ) ) { %>
+                <% if( loginId == null || ( phone != null && !phone.isEmpty() ) ) { %>
                 <!-- 주문 내역 목록 -->
                 <table class="table table-striped table-hover table-bordered text-center align-middle">
                     <thead>

@@ -66,7 +66,7 @@ public class OrderRepository extends JDBConnection {
      */
     public List<Product> list(String userId) {
         List<Product> orderList = new ArrayList<>();
-        String sql = "SELECT * FROM products WHERE user_id = ?";
+        String sql = "SELECT * FROM product WHERE user_id = ?";
         
         try {
             PreparedStatement psmt = con.prepareStatement(sql);
@@ -74,11 +74,11 @@ public class OrderRepository extends JDBConnection {
             rs = psmt.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
+                product.setOrderNo( rs.getInt("orderNo"));
                 product.setProductId(rs.getString("product_id"));
                 product.setName(rs.getString("name"));
                 product.setUnitPrice(rs.getInt("unit_price"));
-                // 필요한 경우에 따라 추가적인 필드를 설정합니다.
-                orderList.add(product);
+                orderList.add(product);	
             }
         } catch (SQLException e) {
             System.err.println("회원의 주문 내역 조회 중 예외 발생");
@@ -93,8 +93,8 @@ public class OrderRepository extends JDBConnection {
      * @param orderPw
      * @return
      */
-    public List<Order> list(String phone, String orderPw) {
-        List<Order> orderList = new ArrayList<>();
+    public List<Product> list(String phone, String orderPw) {
+        List<Product> orderList = new ArrayList<>();
         String sql = "SELECT * FROM order WHERE phone = ? AND order_pw = ?";
         
         try {
@@ -103,18 +103,12 @@ public class OrderRepository extends JDBConnection {
             psmt.setString(2, orderPw);
             rs = psmt.executeQuery();
             while (rs.next()) {
-                Order order = new Order();
-                order.setOrderNo(rs.getInt("order_no"));
-                order.setShipName(rs.getString("ship_name"));
-                order.setZipCode(rs.getString("zip_code"));
-                order.setCountry(rs.getString("country"));
-                order.setAddress(rs.getString("address"));
-                order.setDate(rs.getString("date"));
-                order.setOrderPw(rs.getString("order_pw"));
-                order.setUserId(rs.getString("user_id"));
-                order.setTotalPrice(rs.getInt("total_price"));
-                order.setPhone(rs.getString("phone"));
-                orderList.add(order);
+            	  Product product = new Product();
+                  product.setOrderNo( rs.getInt("orderNo"));
+                  product.setProductId(rs.getString("product_id"));
+                  product.setName(rs.getString("name"));
+                  product.setUnitPrice(rs.getInt("unit_price"));
+                  orderList.add(product);	
             }
         } catch (SQLException e) {
             System.err.println("비회원의 주문 내역 조회 중 예외 발생");
