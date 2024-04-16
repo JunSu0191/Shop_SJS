@@ -9,10 +9,13 @@
 	<title>Shop</title>
 	<jsp:include page="/layout/meta.jsp" /> <jsp:include page="/layout/link.jsp" />
 </head>
-<body>   
+<body>
 	<% 
 		String root = request.getContextPath();
 		String loginId = (String) session.getAttribute("loginId");
+		
+		UserRepository userDAO = new UserRepository();
+		User loginUser = userDAO.getUserById(loginId);
 		
 		if( loginId == null || loginId.equals("") ) {
 			response.sendRedirect(root);
@@ -24,8 +27,6 @@
 			login = true;
 		}
 		
-		UserRepository userDAO = new UserRepository();
-		User loginUser = userDAO.getUserById(loginId);
 		
 		// 이메일 : 아이디@도메인 분리
 		String mail = loginUser.getMail();
@@ -69,7 +70,7 @@
 			      <!-- 로그인 시 -->
 			      <% if( login ) { %>
 		    	  <li class="nav-item">
-			        <a href="<%= root %>/user/index.jsp" class="nav-link link-body-emphasis">
+			        <a href="<%= root %>/user/index.jsp" class="nav-link link-body-emphasis" >
 			          마이 페이지
 			        </a>
 			      </li>

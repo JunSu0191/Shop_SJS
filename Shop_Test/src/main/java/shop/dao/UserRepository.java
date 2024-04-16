@@ -146,19 +146,18 @@ public class UserRepository extends JDBConnection {
 	public int update(User user) {
 		int result = 0;		// 결과 : 적용된 데이터 건수
 		
-		String sql = " UPDATE INTO user (id, password, name, gender, birth, mail, phone, address) "
-				   + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "UPDATE user SET name=?, gender=?, birth=?, mail=?, phone=?, address=? WHERE id=?";
+
 		
 		try {
 			psmt = con.prepareStatement(sql);			// 쿼리 실행 객체 생성
-			psmt.setString( 1, user.getId() );		
-			psmt.setString( 2, user.getPassword() );	
-			psmt.setString( 3, user.getName() );		
-			psmt.setString( 4, user.getGender() );	
-			psmt.setString( 5, user.getBirth());
-			psmt.setString( 6, user.getMail() );		
-			psmt.setString( 7, user.getPhone() );		
-			psmt.setString( 8, user.getAddress() );		
+			psmt.setString(1, user.getName());
+            psmt.setString(2, user.getGender());
+            psmt.setString(3, user.getBirth());
+            psmt.setString(4, user.getMail());
+            psmt.setString(5, user.getPhone());
+            psmt.setString(6, user.getAddress());
+            psmt.setString(7, user.getId());	
 			
 			result = psmt.executeUpdate();		// SQL 실행 요청, 적용된 데이터 개수를 받아온다.
 												// 게시글 1개 적용 성공 시, result : 1
@@ -166,7 +165,7 @@ public class UserRepository extends JDBConnection {
 			// executeUpdate()
 			// : SQL (INSERT, UPDATE, DELETE)을 실행하고 적용된 데이터 개수를 int 타입으로 반환
 		} catch (SQLException e) {	
-			System.err.println("회원가입시 시, 예외 발생");
+			System.err.println("회원정보 수정 시, 예외 발생");
 			e.printStackTrace();
 		}
 		return result;
@@ -179,8 +178,29 @@ public class UserRepository extends JDBConnection {
 	 * @return
 	 */
 	public int delete(String id) {
+		int result = 0;
 		
-	}
+		String sql = "DELETE FROM user"
+				   + " WHERE id = ? ";
+		
+		try {
+			// 쿼리(SQL) 실행 객체 생성 - PreparedStatement (psmt)
+			psmt = con.prepareStatement(sql);
+			
+			// psmt.setXXX( 순서번호, 매핑할 값 );
+			psmt.setString( 1, id );
+			
+			result = psmt.executeUpdate();		// SQL 실행 요청, 적용된 데이터 개수를 받아온다.
+												// 게시글 1개 적용 성공 시, result : 1
+												// 				실패 시, result : 0
+				// executeUpdate()
+				// : SQL (INSERT, UPDATE, DELETE)을 실행하고 적용된 데이터 개수를 int 타입으로 반환
+			} catch (SQLException e) {	
+			System.err.println("회원 탈퇴시 , 예외 발생");
+			e.printStackTrace();
+			}
+			return result;
+		}
 	
 	/**
 	 * 토큰 리프레쉬

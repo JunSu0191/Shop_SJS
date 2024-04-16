@@ -11,21 +11,23 @@
 </head>
 <body>   
 	
-	<%  
-		String root = request.getContextPath(); 
-		String loginId = (String) session.getAttribute("loginId");
-	%>
+	
 	<jsp:include page="/layout/header.jsp" />
 	
 	<div class="row m-0 mypage">
 		<div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
 			<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary">
 			    <ul class="nav nav-pills flex-column mb-auto">
+			    <%  
+					String root = request.getContextPath(); 
+					String loginId = (String) session.getAttribute("loginId");
+					
+				%>
 			      <!-- 로그인 시 -->
 			      <% if( loginId != null ) { %>
 			      	
 			      <li>
-			        <a href="<%= root %>/user/index.jsp" class="nav-link link-body-emphasis ">
+			        <a href="<%= root %>/user/index.jsp" class="nav-link active" aria-current="page">
 			          마이 페이지
 			        </a>
 			        <a href="<%= root %>/user/update.jsp" class="nav-link link-body-emphasis">
