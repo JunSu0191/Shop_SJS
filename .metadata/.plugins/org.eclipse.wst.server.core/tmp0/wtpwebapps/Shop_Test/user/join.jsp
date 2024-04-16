@@ -3,6 +3,47 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <script>
+ function validateForm() {
+	    // 비밀번호 변수 선언 위치 변경
+	    var confirmPassword = document.getElementById("pw_confirm").value;
+	    var password = document.getElementById("pw").value;
+	    
+	    // 비밀번호와 비밀번호 확인이 일치하는지 확인
+	    if (password !== confirmPassword) {
+	        alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+	        return false;
+	    }
+	    
+	    // 비밀번호의 정규식 검사
+	    var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/;
+	    if (!passwordRegex.test(password)) {
+	        alert("비밀번호는 8자 이상의 영문과 숫자 조합이어야 합니다.");
+	        return false;
+	    }
+	    
+	    // 이름 유효성 검사 (숫자가 포함되어 있지 않은지)
+	    var name = document.getElementById("name").value;
+	    var nameRegex = /^[가-힣]+$/;
+	    if (!nameRegex.test(name) || !name) {
+	        alert("이름은 한글로만 입력해야 합니다.");
+	        return false;
+	    }
+
+	    // 아이디 유효성 검사 (영문자 또는 한글로 시작)
+	    var id = document.getElementById("id").value;
+	    var idRegex = /^[a-zA-Z가-힣][a-zA-Z가-힣0-9]*$/;
+	    if (!idRegex.test(id) || !id) {
+	        alert("아이디는 영문자 또는 한글로 시작해야 합니다.");
+	        return false;
+	    }
+
+	    // 폼 제출 방지
+	    return true;
+	}
+
+    </script>
+
 	<meta charset="UTF-8">
 	<title>Shop</title>
 	<jsp:include page="/layout/meta.jsp" /> <jsp:include page="/layout/link.jsp" />
@@ -16,30 +57,30 @@
 	
 	<!-- 회원 가입 영역 -->
 	<div class="container shop p-5 mb-5" >
-		<form action="join_pro.jsp" name="joinForm" method="post" >
+		<form action="join_pro.jsp" name="joinForm" method="post" onsubmit="return validateForm()">
 		
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-4" id="">아이디</label>
 				<input type="text" class="form-control col-md-8" 
-					   name="id" placeholder="아이디" required>
+					   name="id" id="id" placeholder="아이디" required>
 			</div>
 			
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-4" id="">비밀번호</label>
 				<input type="password" class="form-control col-md-8" 
-					   name="pw" placeholder="비밀번호" required>
+					   name="pw" id="pw" placeholder="비밀번호" required>
 			</div>
 			
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-4" id="">비밀번호 확인</label>
 				<input type="password" class="form-control col-md-8" 
-					   name="pw_confirm" placeholder="비밀번호 확인" required>
+					   name="pw_confirm" id="pw_confirm" placeholder="비밀번호 확인" required>
 			</div>
 			
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-4" id="">이름</label>
 				<input type="text" class="form-control col-md-8" 
-					   name="name" placeholder="이름" required>
+					   name="name" id="name" placeholder="이름" required>
 			</div>
 			
 			<div class="input-group mb-3 row">
