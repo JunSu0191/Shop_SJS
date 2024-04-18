@@ -20,7 +20,7 @@ public class OrderRepository extends JDBConnection {
         String sql = "INSERT INTO order (ship_name, zip_code, country, address, date, order_pw, user_id, total_price, phone) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?)";
         
         try {
-            PreparedStatement psmt = con.prepareStatement(sql);
+            psmt = con.prepareStatement(sql);
             psmt.setString(1, order.getShipName());
             psmt.setString(2, order.getZipCode());
             psmt.setString(3, order.getCountry());

@@ -23,9 +23,9 @@
         OrderRepository orderDAO = new OrderRepository();
         Order order = new Order();
         // ...
+        List<Product> orderList = (List<Product>) session.getAttribute("orderList");
 
         // 주문 내역 목록을 세션에서 가져오기
-        List<Product> orderList = (List<Product>) session.getAttribute("orderList");
         if (orderList == null) {
             orderList = new ArrayList<>(); // 초기화
             session.setAttribute("orderList", orderList);
@@ -97,7 +97,7 @@
                         </div>
                     <% } %>
                     </form>
-                <% if( loginId == null || ( phone != null && !phone.isEmpty() ) ) { %>
+                <% if( loginId != null || loginId == null || ( phone != null && !phone.isEmpty() ) ) { %>
                 <!-- 주문 내역 목록 -->
                 <table class="table table-striped table-hover table-bordered text-center align-middle">
                     <thead>

@@ -38,6 +38,8 @@
 		// 생일 : 연/월/일 분리
 		String birthStr = loginUser.getBirth();
 		String[] temp2 = {"","",""};
+		// DB의 birth의 생년월일을 '/'로 쪼개서 가져오기때문에,
+		// DB에 저장된 birth는 '/'로 쪼개서 저장되어야대 => 결론, 회원가입할때도 생년월일 '/'더해서 저장해야함.
 		String[] birth = (birthStr != null && !birthStr.isEmpty() && birthStr.contains("/") ) ? birthStr.split("/") : temp2;
 		String year = "";
 		String month = "";

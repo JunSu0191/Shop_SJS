@@ -14,12 +14,14 @@
     }
     
     // 주문 정보 받아오기
+    int orderNo = Integer.parseInt("orderNo");
     String productName = request.getParameter("productName");
     int unitPrice = Integer.parseInt(request.getParameter("unitPrice"));
     int quantity = Integer.parseInt(request.getParameter("quantity"));
     
     // Product 객체 생성 및 정보 설정
     Product product = new Product();
+    product.setOrderNo(orderNo);
     product.setName(productName);
     product.setUnitPrice(unitPrice);
     product.setQuantity(quantity);
@@ -31,7 +33,7 @@
     session.setAttribute("orderList", orderList);
     
     // 주문 페이지로 리다이렉트
-    response.sendRedirect(root + "/user/order.jsp");
+    response.sendRedirect("/user/order.jsp");
 %>
 
 		

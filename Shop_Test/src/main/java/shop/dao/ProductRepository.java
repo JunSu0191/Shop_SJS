@@ -8,14 +8,37 @@ import shop.dto.Product;
 
 public class ProductRepository extends JDBConnection {
 	
-	/**
-	 * 상품 목록
-	 * @return
-	 */
-	public List<Product> list() {
-		
-	}
-	
+	 /**
+     * 상품 목록 조회
+     * @return 상품 목록
+     */
+    public List<Product> list() {
+        List<Product> productList = new ArrayList<>();
+        String sql = "SELECT * FROM product";
+        
+        try {
+            psmt = con.prepareStatement(sql);
+            
+            rs = psmt.executeQuery();
+            
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductId(rs.getString("product_id"));
+                
+                product.setFile(rs.getString("file"));
+                product.setName(rs.getString("name"));
+                product.setDescription(rs.getString("description"));
+                product.setUnitPrice(rs.getInt("unit_price"));
+                productList.add(product);
+            }
+            
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return productList;
+    }
 	
 	/**
 	 * 상품 목록 검색
@@ -32,7 +55,35 @@ public class ProductRepository extends JDBConnection {
 	 * @return
 	 */
 	public Product getProductById(String productId) {
-		
+	        String sql = "SELECT * FROM product WHERE product_id = ?";
+	        
+	        try {
+	            psmt = con.prepareStatement(sql);
+	            
+	            psmt.setString(1, productId);
+	            
+	            rs = psmt.executeQuery();
+	            
+	            while (rs.next()) {
+	                Product product = new Product();
+	                product.setProductId(rs.getString("product_id"));
+	                product.setName(rs.getString("name"));
+	                product.setUnitPrice(rs.getInt("unit_price"));
+	                product.setDescription(rs.getString("description"));
+	                product.setManufacturer(rs.getString("manufacturer"));
+	                product.setCategory(rs.getString("category"));
+	                product.setUnitsInStock(rs.getInt("units_in_stock"));
+	                product.setCondition(rs.getString("condition"));
+	                product.setFile(rs.getString("file"));
+
+	                return product;
+	            }
+	            
+	            rs.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return null;
 	}
 	
 	

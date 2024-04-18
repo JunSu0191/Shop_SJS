@@ -20,7 +20,7 @@
    
    // 로그인 실패
    if( loginUser == null ) {
-      response.sendRedirect("login.jsp?msg=0");
+      response.sendRedirect("login.jsp?error=0");
       return;
    }
    

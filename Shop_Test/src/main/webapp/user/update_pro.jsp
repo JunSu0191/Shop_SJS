@@ -9,7 +9,7 @@
 	String year = request.getParameter("year");
 	String month = request.getParameter("month");
 	String day = request.getParameter("day");
-	String birth = year + "-" + month + "-" + day;
+	String birth = year + "/" + month + "/" + day;
 	String mail = request.getParameter("email1") + "@" + request.getParameter("email2");
 	String phone = request.getParameter("phone");		
 	String address = request.getParameter("address");

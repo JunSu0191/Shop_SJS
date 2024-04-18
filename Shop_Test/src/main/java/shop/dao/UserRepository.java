@@ -124,6 +124,12 @@ public class UserRepository extends JDBConnection {
 				// rs.getXXX("컬럼명") --> 해당 컬럼의 데이터를 가져온다
 				// * "컬럼명"의 값을 특정 타입으로 변환
 				user.setId( rs.getString("id") );
+				user.setName( rs.getString("name"));
+				user.setGender( rs.getString("gender"));
+				user.setBirth( rs.getString("birth"));
+				user.setMail( rs.getString("mail"));
+				user.setPhone( rs.getString("phone"));
+				user.setAddress( rs.getString("address"));
 				
 				return user;		
 				
