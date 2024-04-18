@@ -24,11 +24,14 @@ public class ProductRepository extends JDBConnection {
             while (rs.next()) {
                 Product product = new Product();
                 product.setProductId(rs.getString("product_id"));
-                
-                product.setFile(rs.getString("file"));
                 product.setName(rs.getString("name"));
-                product.setDescription(rs.getString("description"));
                 product.setUnitPrice(rs.getInt("unit_price"));
+                product.setDescription(rs.getString("description"));
+                product.setManufacturer(rs.getString("manufacturer"));
+                product.setCategory(rs.getString("category"));
+                product.setUnitsInStock(rs.getInt("units_in_stock"));
+                product.setCondition(rs.getString("condition"));
+                product.setFile(rs.getString("file"));
                 productList.add(product);
             }
             
