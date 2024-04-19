@@ -6,7 +6,8 @@
  
 	<meta charset="UTF-8">
 	<title>Shop</title>
-	<jsp:include page="/layout/meta.jsp" /> <jsp:include page="/layout/link.jsp" />
+	<jsp:include page="/layout/meta.jsp" />
+	<jsp:include page="/layout/link.jsp" />
 </head>
 <body>
 
@@ -17,33 +18,32 @@
 			<p class="lead mb-4">Shop 쇼핑몰 입니다.</p>
 		</div>
 	</div>
+	
 
 	<!-- 상품 등록 입력 화면 -->
 	<div class="container shop">
 		<!-- [NEW] enctype 추가 -->
-		<form name="product" action="./add_pro.jsp"
-			onsubmit="return checkProduct()" method="post"
-			enctype="multipart/form-data">
-
+		<form name="product" action="add_pro.jsp" onsubmit="return checkProduct()" method="POST" enctype="multipart/form-data">
+	
 			<!-- [NEW] 파일 입력 추가 -->
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">상품 이미지</label> <input
-					type="file" class="form-control col-md-10" name="file">
+					type="file" class="form-control col-md-10" name="file" />
 			</div>
 
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">상품 코드</label> <input
-					type="text" class="form-control col-md-10" name="productId">
+					type="text" class="form-control col-md-10" name="productId" />
 			</div>
 
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">상품명</label> <input
-					type="text" class="form-control col-md-10" name="name">
+					type="text" class="form-control col-md-10" name="name" />
 			</div>
 
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">가격</label> <input
-					type="number" class="form-control col-md-10" name="unitPrice">
+					type="number" class="form-control col-md-10" name="unitPrice" />
 			</div>
 			<div class="input-group mb-3 row">
 				<label class="input-group-text w-100" id="">상세 정보</label>
@@ -52,15 +52,15 @@
 			</div>
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">제조사</label> <input
-					type="text" class="form-control col-md-10" name="manufacturer">
+					type="text" class="form-control col-md-10" name="manufacturer" />
 			</div>
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">분류</label> <input
-					type="text" class="form-control col-md-10" name="category">
+					type="text" class="form-control col-md-10" name="category" />
 			</div>
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">재고 수</label> <input
-					type="number" class="form-control col-md-10" name="unitsInStock">
+					type="number" class="form-control col-md-10" name="unitsInStock" />
 			</div>
 			<div class="input-group mb-3 row">
 				<div class="col-md-2 p-0">
@@ -70,19 +70,18 @@
 					<div class="radio-box d-flex">
 						<div class="radio-item mx-5">
 							<input type="radio" class="form-check-input" name="condition"
-								value="NEW" id="condition-new"> <label
-								for="condition-new">신규 제품</label>
+								value="NEW" id="condition-new" /> <label for="condition-new">신규 제품</label>
 						</div>
 
 						<div class="radio-item mx-5">
 							<input type="radio" class="form-check-input " name="condition"
-								value="OLD" id="condition-old"> <label
-								for="condition-old">중고 제품</label>
+								value="OLD" id="condition-old" /> 
+							<label for="condition-old">중고 제품</label>
 						</div>
 
 						<div class="radio-item mx-5">
 							<input type="radio" class="form-check-input " name="condition"
-								value="RE" id="condition-re"> <label for="condition-re">재생
+								value="RE" id="condition-re" /> <label for="condition-re">재생
 								제품</label>
 						</div>
 					</div>

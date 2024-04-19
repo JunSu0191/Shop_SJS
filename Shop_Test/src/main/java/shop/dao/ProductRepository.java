@@ -95,9 +95,38 @@ public class ProductRepository extends JDBConnection {
 	 * @param product
 	 * @return
 	 */
-	public int insert(Product product) {
-		
+	public int insert(Product product) throws SQLException {
+		int result = 0;
+	    String sql = "INSERT INTO product (product_id, name, unit_price, description, manufacturer, category, units_in_stock, condition, file)"
+	    		   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	    try {
+	    	psmt = con.prepareStatement(sql);
+	        psmt.setString(1, product.getProductId() );
+	        System.out.println(product.getProductId());
+	        psmt.setString(2, product.getName() );
+	        System.out.println(product.getName());
+	        psmt.setInt(3, product.getUnitPrice() );
+	        System.out.println(product.getUnitPrice());
+	        psmt.setString(4, product.getDescription() );
+	        psmt.setString(5, product.getManufacturer() );
+	        psmt.setString(6, product.getCategory() );
+	        psmt.setLong(7, product.getUnitsInStock() );
+	        System.out.println(product.getUnitsInStock());
+	        psmt.setString(8, product.getCondition() );
+	        psmt.setString(9, product.getFile() );
+	        
+	        
+	        result = psmt.executeUpdate();
+	        
+	        
+	    } catch (SQLException e) {
+	        System.err.println("상품 등록 시, 예외 발생");
+	        e.printStackTrace();
+	    }
+	    return result;
 	}
+
 	
 	
 	/**
