@@ -36,7 +36,7 @@
             <p class="text-center">쇼핑몰 상품 목록 입니다.</p>
             <div class="d-flex justify-content-center gap-2">
                 <a href="add.jsp" class="btn btn-primary">상품 등록</a> 
-                <a href="editProducts.jsp" class="btn btn-success">상품 편집</a> 
+                <a href="products.jsp" class="btn btn-success">상품 목록</a> 
             </div>
         </div>
 		
@@ -57,10 +57,11 @@
                                 </div>
                                 <p class="d-flex justify-content-end">
 								<!-- [NEW] 수정 버튼으로 변경 -->
-								<a href="./update.jsp?id=" class="btn btn-primary mx-2">수정</a>
+								<a href="update.jsp?productId=<%= product.getProductId() %>" class="btn btn-primary mx-2">수정</a>
 								<!-- [NEW] 삭제 버튼 추가 -->
 
-								<a href="delete_pro.jsp?id=" class="btn btn-danger mx-2" onclick="deleteProduct()">삭제</a>
+								<a href="delete_pro.jsp?product_id=<%= product.getProductId() %>" class="btn btn-danger mx-2" onclick="deleteProduct()">삭제</a>
+
 							</p>
                             </div>
                         </div>

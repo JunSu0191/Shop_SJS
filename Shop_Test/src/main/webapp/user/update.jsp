@@ -7,7 +7,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Shop</title>
-	<jsp:include page="/layout/meta.jsp" /> <jsp:include page="/layout/link.jsp" />
+	<jsp:include page="/layout/meta.jsp" /> 
+	<jsp:include page="/layout/link.jsp" />
 </head>
 <body>
 	<% 
@@ -222,17 +223,9 @@
 				</form>
 			
 			</div>
-			
-			<jsp:include page="/layout/footer.jsp" />
 		</div>
 	</div>
 	
-	
-	
-	<jsp:include page="/layout/script.jsp" />
-	
-	
-
 	<script>
 		
 		let form = document.updateForm
@@ -273,6 +266,8 @@
 		}
 	
 	</script>
+	<jsp:include page="/layout/footer.jsp" />
+	<jsp:include page="/layout/script.jsp" />
 </body>
 </html>
 

@@ -168,7 +168,34 @@ public class ProductRepository extends JDBConnection {
 	 * @return
 	 */
 	public int update(Product product) {
-		return 0;
+		int result = 0;		// 결과 : 적용된 데이터 건수
+		
+		String sql = "UPDATE product SET name=?, unit_price=?, description=?, manufacturer=?, category=?, units_in_stock=?, `condition`=?, file=? WHERE product_id=?";
+
+
+		
+		try {
+	    	psmt = con.prepareStatement(sql);
+	        psmt.setString(1, product.getName() );
+	        psmt.setInt(2, product.getUnitPrice() );
+	        psmt.setString(3, product.getDescription() );
+	        psmt.setString(4, product.getManufacturer() );
+	        psmt.setString(5, product.getCategory() );
+	        psmt.setLong(6, product.getUnitsInStock() );
+	        psmt.setString(7, product.getCondition() );
+	        psmt.setString(8, product.getFile() );
+	        psmt.setString(9, product.getProductId() );
+	        
+			result = psmt.executeUpdate();		// SQL 실행 요청, 적용된 데이터 개수를 받아온다.
+												// 게시글 1개 적용 성공 시, result : 1
+												// 				실패 시, result : 0
+			// executeUpdate()
+			// : SQL (INSERT, UPDATE, DELETE)을 실행하고 적용된 데이터 개수를 int 타입으로 반환
+		} catch (SQLException e) {	
+			System.err.println("상품 수정 시, 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	

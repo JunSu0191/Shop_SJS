@@ -1,20 +1,20 @@
 <%@page import="shop.dao.ProductRepository"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <%
 	String id = request.getParameter("product_id");
+	System.out.println(id);
 	ProductRepository productDAO = new ProductRepository();
 	
-	// 惑前 昏力
-	int reuslt = productDAO.delete(id);
+	// 靸來拡 靷牅
+	int result = productDAO.delete(id);
 	
-	if( reuslt > 0) {
+	if( result > 0 ) {
 		response.sendRedirect("editProducts.jsp?msg=0");
-		System.out.println("昏力 己傍");
+		System.out.println("靷牅 靹标车");
 	} else {
 		response.sendRedirect("editProducts.jsp?msg=1");
-		System.out.println("昏力 角菩");
+		System.out.println("靷牅 鞁ろ尐");
 	}
-
 %>
