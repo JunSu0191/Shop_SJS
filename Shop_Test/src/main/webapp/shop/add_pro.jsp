@@ -8,7 +8,7 @@
 <%
     // 파일 업로드 관련 설정
 	String realFolder = "C:\\upload"; // 파일이 업로드될 실제 폴더 경로
-	int maxSize = 5 * 1024 * 1024; // 최대 업로드 파일 크기 (5MB)
+	int maxSize = 10 * 1024 * 1024; // 최대 업로드 파일 크기 (10MB)
 	String enType = "UTF-8"; // 인코딩 타입
 
 	try {

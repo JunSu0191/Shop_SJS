@@ -24,15 +24,18 @@
 	<jsp:include page="/layout/link.jsp" />
 	<script>
 	
+
+		}
 		// 장바구니 추가
-		function addToCart() {
-			if( confirm("상품을 장바구니에 추가하시겠습니까?") ) {
+		function addToorder() {
+			if( confirm("상품을 주문하시겠습니까?") ) {
 				document.addForm.submit()
 			} else {
 				document.addForm.reset()
 			}
 			
 		}
+		
 		
 	</script>
 
@@ -97,10 +100,10 @@
 						<input type="hidden" name="id" value="P000000">
 						<div class="btn-box d-flex justify-content-end ">
 							<!-- [NEW] 장바구니 버튼 추가 -->
-							<a href="./cart.jsp" class="btn btn-lg btn-warning mx-3">장바구니</a>
+							<a href="./cart.jsp" class="btn btn-lg btn-warning mx-3" onclick="addToCart()">장바구니</a>
 							
 							<!-- 페이지 이동 막기 :  href="javascript:;" -->			
-							<a href="javascript:;" class="btn btn-lg btn-success mx-3" onclick="addToCart()">주문하기</a>
+							<a href="./order.jsp" class="btn btn-lg btn-success mx-3" onclick="addToorder()">주문하기</a>
 						</div>
 					</form>
 				</div>

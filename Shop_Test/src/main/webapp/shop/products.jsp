@@ -38,7 +38,7 @@
             <div class="d-flex justify-content-center gap-2">
                 <a href="add.jsp" class="btn btn-primary">상품 등록</a> 
                 <a href="editProducts.jsp" class="btn btn-success">상품 편집</a> 
-                <a href="" class="btn btn-warning">장바구니</a>
+                <a href="cart.jsp" class="btn btn-warning">장바구니</a>
             </div>
         </div>
 
@@ -58,7 +58,7 @@
                                         ₩<%=product.getUnitPrice()%>
                                     </p>
                                     <div class="d-flex justify-content-between px-3 mb-5">
-                                        <a href="<%= root %>/shop/cart_pro.jsp?id=" class="btn btn-outline-primary">
+                                        <a href="cart_pro.jsp?id=<%= product.getProductId() %>" class="btn btn-outline-primary">
                                         <i class="material-symbols-outlined">shopping_bag</i></a>
                                         <a href="<%= root %>/shop/product.jsp?id=<%= product.getProductId() %>" class="btn btn-outline-primary">상세정보</a>
                                     </div>
@@ -71,5 +71,6 @@
 		    </div>
     <!-- 푸터 -->
     <jsp:include page="/layout/footer.jsp" />
+    <jsp:include page="/layout/script.jsp" />
 </body>
 </html>

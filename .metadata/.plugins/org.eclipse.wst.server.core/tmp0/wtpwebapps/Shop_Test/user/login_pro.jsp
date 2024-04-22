@@ -1,4 +1,6 @@
 <!-- 로그인 처리 -->
+<%@page import="shop.dto.Product"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.UUID"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="shop.dto.User"%>
@@ -17,7 +19,7 @@
    
    UserRepository userDAO = new UserRepository();
    User loginUser = userDAO.login(id, pw);
-   
+   List<Product> cartList = (List<Product>) session.getAttribute("cartList");
    // 로그인 실패
    if( loginUser == null ) {
       response.sendRedirect("login.jsp?error=0");
@@ -94,7 +96,7 @@
    
    
    // 로그인 성공 페이지로 이동
-   response.sendRedirect("complete.jsp?msg=0");      
+   response.sendRedirect("complete.jsp?msg=0");    
 
 %>
 
