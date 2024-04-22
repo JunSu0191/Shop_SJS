@@ -22,22 +22,25 @@
 
 	<jsp:include page="/layout/meta.jsp" />
 	<jsp:include page="/layout/link.jsp" />
-	<script>
-	
+<script>
+    function addToorder() {
+        if (confirm("장바구니에 추가하시겠습니까?")) {
+            // AJAX를 사용하여 장바구니에 제품 추가
+            var productId = '<%= product.getProductId() %>';
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "./addCart.jsp", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // AJAX 요청이 성공하면 product.jsp로 리디렉션
+                    window.location.href = "./product.jsp?id=" + productId;
+                }
+            };
+            xhr.send("id=" + productId);
+        }
+    }
+</script>
 
-		}
-		// 장바구니 추가
-		function addToorder() {
-			if( confirm("상품을 주문하시겠습니까?") ) {
-				document.addForm.submit()
-			} else {
-				document.addForm.reset()
-			}
-			
-		}
-		
-		
-	</script>
 
 </head>
 <body>  
@@ -101,9 +104,7 @@
 						<div class="btn-box d-flex justify-content-end ">
 							<!-- [NEW] 장바구니 버튼 추가 -->
 							<a href="./cart.jsp" class="btn btn-lg btn-warning mx-3" onclick="addToCart()">장바구니</a>
-							
-							<!-- 페이지 이동 막기 :  href="javascript:;" -->			
-							<a href="./order.jsp" class="btn btn-lg btn-success mx-3" onclick="addToorder()">주문하기</a>
+							<a href="./cart_pro.jsp?id=<%= product.getProductId() %>" class="btn btn-lg btn-success mx-3" onclick="addToorder()">주문하기</a>
 						</div>
 					</form>
 				</div>

@@ -15,13 +15,33 @@
 <title>장바구니</title>
 <jsp:include page="/layout/meta.jsp" />
 <jsp:include page="/layout/link.jsp" />
-</head>
-<body>
-	<%
+<%
 	ProductRepository productRepository = new ProductRepository();
 	List<Product> cartList = (List<Product>) session.getAttribute("cartList");
 	int sum = 0;
-	%>
+%>
+<script>
+
+    let cartCount = <%= cartList != null ? cartList.size() : 0 %>; // 장바구니에 담긴 상품 개수 가져오기
+    let cartSum = <%= sum %>; // 총 주문금액 가져오기
+    
+    function order() {
+        if (cartCount === 0) {
+            alert('장바구니에 담긴 상품이 없습니다.');
+            return;
+        }
+        let msg = '총 ' + cartCount + '개의 상품을 주문합니다.\n총 주문금액: ₩' + cartSum;
+        let check = confirm(msg);
+        if (check) {
+            location.href = 'ship.jsp?cartId=' + cartId;
+        }
+    }
+
+</script>
+
+</head>
+<body>
+	
 	<!-- 헤더 -->
 	<jsp:include page="/layout/header.jsp" />
 
@@ -56,7 +76,7 @@
 					<td>₩ <%=product.getUnitPrice()%></td>
 					<td><%=quantity%></td>
 					<td>₩ <%=quantity * product.getUnitPrice()%></td>
-					<td><a href="deleteCart.jsp?id=<%=product.getProductId()%>"
+					<td><a href="deleteCart.jsp?product_id=<%=product.getProductId()%>"
 						class="btn btn-danger">삭제</a></td>
 				</tr>
 				<%
@@ -86,8 +106,7 @@
 		<div class="d-flex justify-content-between align-items-center p-3">
 			<a href="deleteCart.jsp?cartId=35B4B7BC4ED46167E3E05CE27579D73D"
 				class="btn btn-lg btn-danger ">전체삭제</a>
-			<a href="javascript:;"
-				class="btn btn-lg btn-primary" onclick="order()">주문하기</a>
+			<a href="ship.jsp" class="btn btn-lg btn-primary" onclick="order()">주문하기</a>
 		</div>
 	</div>
 	
