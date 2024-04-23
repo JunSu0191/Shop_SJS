@@ -15,9 +15,6 @@
     String keyword = request.getParameter("keyword");
     keyword = keyword == null ? "" : keyword;
     List<Product> productList = productDAO.list(keyword);
-    if (productList == null) {
-        productList = new ArrayList<>();
-    }
 %>
 <!DOCTYPE html>
 <html>
