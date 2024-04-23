@@ -17,7 +17,7 @@ public class OrderRepository extends JDBConnection {
      */
     public int insert(Order order) {
         int result = 0;
-        String sql = "INSERT INTO order (ship_name, zip_code, country, address, date, order_pw, user_id, total_price, phone) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?)";
+        String sql = "INSERT INTO order (ship_name, zip_code, country, address, date, order_pw, user_id, total_price, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
             psmt = con.prepareStatement(sql);
@@ -36,6 +36,8 @@ public class OrderRepository extends JDBConnection {
         }
         return result;
     }
+    
+    
 
     /**    
      * 최근 등록한 orderNo 

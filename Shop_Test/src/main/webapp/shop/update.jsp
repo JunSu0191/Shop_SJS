@@ -58,9 +58,11 @@
 				<input type="number" class="form-control col-md-10" name="unitPrice" required value="<%= product.getUnitPrice() %>">
 			</div>
 			<div class="input-group mb-3 row">
-				<label class="input-group-text w-100" id="">상세 정보</label>
-				<input class="form-control" name="description" style="height: 200px !important;" value="<%= product.getDescription() %>">
+				<div class="input-group mb-3 row">
+			    <label class="input-group-text w-100" id="">상세 정보</label>
+			    <textarea class="form-control" name="description" style="height: 200px !important;" required><%= product.getDescription() %></textarea>
 			</div>
+				</div>
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">제조사</label>
 				<input type="text" class="form-control col-md-10" name="manufacturer" value="<%= product.getManufacturer() %>">

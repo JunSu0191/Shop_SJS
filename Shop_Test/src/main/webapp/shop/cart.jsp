@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>장바구니</title>
 <jsp:include page="/layout/meta.jsp" />
 <jsp:include page="/layout/link.jsp" />
@@ -76,11 +76,11 @@
                class="btn btn-danger">삭제</a></td>
          </tr>
          <%
+         	}
          }
          %>
          </tbody>
          <%
-         }
          if (!(cartList == null || cartList.isEmpty())) {
          %>
          <tfoot>
