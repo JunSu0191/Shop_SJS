@@ -17,18 +17,20 @@ public class OrderRepository extends JDBConnection {
      */
     public int insert(Order order) {
         int result = 0;
-        String sql = "INSERT INTO order (ship_name, zip_code, country, address, date, order_pw, user_id, total_price, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO 'order' (order_no, ship_name, zip_code, country, address, order_pw, user_id, total_price, phone)"
+        		   + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
             psmt = con.prepareStatement(sql);
-            psmt.setString(1, order.getShipName());
-            psmt.setString(2, order.getZipCode());
-            psmt.setString(3, order.getCountry());
-            psmt.setString(4, order.getAddress());
-            psmt.setString(5, order.getOrderPw());
-            psmt.setString(6, order.getUserId());
-            psmt.setInt(7, order.getTotalPrice());
-            psmt.setString(8, order.getPhone());
+            psmt.setInt(1, order.getOrderNo());
+            psmt.setString(2, order.getShipName());
+            psmt.setString(3, order.getZipCode());
+            psmt.setString(4, order.getCountry());
+            psmt.setString(5, order.getAddress());
+            psmt.setString(6, order.getOrderPw());
+            psmt.setString(7, order.getUserId());
+            psmt.setInt(8, order.getTotalPrice());
+            psmt.setString(9, order.getPhone());
             result = psmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("주문 등록 중 예외 발생");

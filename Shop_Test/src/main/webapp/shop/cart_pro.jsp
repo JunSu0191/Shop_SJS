@@ -13,6 +13,7 @@
 </head>
 <body>
 <%
+	String totalPrice = request.getParameter("totalPrice");
 	ProductRepository productRepository = new ProductRepository();
 	String productId = request.getParameter("id");
 	Product product = productRepository.getProductById(productId);

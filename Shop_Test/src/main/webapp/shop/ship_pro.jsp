@@ -20,8 +20,7 @@
     order.setAddress(addressName);
     order.setPhone(phone);
     
-    OrderRepository orderDAO = new OrderRepository();
-    
+   	
     session.setAttribute("order", order);
     response.sendRedirect("order.jsp");
 %>
