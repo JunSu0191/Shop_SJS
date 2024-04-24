@@ -4,12 +4,12 @@
 <%@page import="shop.dto.Product"%>
 <%@page import="java.util.List"%>
 <%@page import="shop.dto.Order"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 	<jsp:include page="/layout/meta.jsp" />
 	<jsp:include page="/layout/link.jsp" />
@@ -22,11 +22,12 @@
 	Order orderPro = (Order) session.getAttribute("order");
 	String orderPw = request.getParameter("orderpw");
 	int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
+	String userId = request.getParameter("loginId");
 
 	
 	
 	Order order = new Order();
-	order.setUserId(loginId);
+	order.setUserId(userId);
 	order.setOrderPw(orderPw);
 	order.setTotalPrice(totalPrice);
 	order.setShipName(orderPro.getShipName());
@@ -38,35 +39,32 @@
 	
 	OrderRepository orderDAO = new OrderRepository();
 	int result = orderDAO.insert(order);
-	
-	if( result > 0) {
-		
-	}
+	String root = request.getContextPath();
 	
 %>
 	<div class="px-4 py-5 my-5 text-center">
-		<h1 class="display-5 fw-bold text-body-emphasis">аж╧╝ ©о╥А</h1>
+		<h1 class="display-5 fw-bold text-body-emphasis">Лё╪К╛╦ Л≥└Кё▄</h1>
 	</div>
 	
 	
 	<div class="container order mb-5 p-5">
 		
-		<h2 class="text-center">аж╧╝юл ©о╥А╣г╬З╫ю╢о╢ы.</h2>
-		<!-- аж╧╝а╓╨╦ -->
+		<h2 class="text-center">Лё╪К╛╦Л²╢ Л≥└Кё▄К░≤Л≈┬Л┼╣К▀┬К▀╓.</h2>
+		<!-- Лё╪К╛╦Л═∙КЁ╢ -->
 		<div class="ship-box">
 			<table class="table ">
 				<tbody><tr>
-					<td>аж╧╝╧Ьхё :</td>
+					<td>Лё╪К╛╦К╡┬М≤╦ :</td>
 					<td><%= order.getOrderNo() %></td>
 				</tr>
 				<tr>
-					<td>╧Х╪шаЖ :</td>
+					<td>К╟╟Л├║Л╖─ :</td>
 					<td><%= order.getAddress() %></td>
 				</tr>
 			</tbody></table>
 			
 			<div class="btn-box d-flex justify-content-center">
-				<a href="/user/order.jsp" class="btn btn-primary btn-lg px-4 gap-3">аж╧╝Ё╩©╙</a>
+				<a href="<%= root %>/user/order.jsp" class="btn btn-primary btn-lg px-4 gap-3">Лё╪К╛╦К┌╢Л≈╜</a>
 			</div>
 		</div>
 	</div>

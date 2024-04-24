@@ -29,27 +29,27 @@
 			<input type="hidden" name="cartId" value="">
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">성명</label>
-				<input type="text" class="form-control col-md-10" name="name" value="">
+				<input type="text" class="form-control col-md-10" name="name">
 			</div>		
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">배송일</label>
-				<input type="text" class="form-control col-md-10" name="shippingDate" value="">
+				<input type="text" class="form-control col-md-10" name="shippingDate">
 			</div>
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">국가명</label>
-				<input type="text" class="form-control col-md-10" name="country" value="">
+				<input type="text" class="form-control col-md-10" name="country">
 			</div>
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">우편번호</label>
-				<input type="text" class="form-control col-md-10" name="zipCode" value="">
+				<input type="text" class="form-control col-md-10" name="zipCode">
 			</div>
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">주소</label>
-				<input type="text" class="form-control col-md-10" name="addressName" value="">
+				<input type="text" class="form-control col-md-10" name="addressName">
 			</div>
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">전화번호</label>
-				<input type="text" class="form-control col-md-10" name="phone" value="">
+				<input type="text" class="form-control col-md-10" name="phone">
 			</div>
 			
 			<!-- 버튼 영역 -->

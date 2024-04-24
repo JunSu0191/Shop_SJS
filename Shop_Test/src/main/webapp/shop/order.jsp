@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
     <title>주문 정보</title> 
 	<jsp:include page="/layout/meta.jsp" />
 	<jsp:include page="/layout/link.jsp" />
@@ -15,6 +15,7 @@
 	
 <body> 
 	<%
+	
 	Order order = (Order) session.getAttribute("order");
 	
 	String loginId = (String) session.getAttribute("loginId");
@@ -110,7 +111,7 @@
 		               <td></td>
 		               <td></td>
 		               <td>총액</td>
-		               <td name="totalPrice"><%=sum %></td>
+		               <td><%=sum %></td>
 		               <td></td>
 		            </tr>
 		         </tfoot>
