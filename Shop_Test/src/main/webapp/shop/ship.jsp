@@ -1,17 +1,17 @@
 <%@page import="shop.dto.Order"%>
 <%@page import="shop.dao.OrderRepository"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>»óÇ° ÁÖ¹®</title>
+<title>ìƒí’ˆ ì£¼ë¬¸</title>
 	<jsp:include page="/layout/meta.jsp" />
 	<jsp:include page="/layout/link.jsp" />
 </head>
 <body>   
-   <!-- Çì´õ -->
+   <!-- í—¤ë” -->
    <jsp:include page="/layout/header.jsp" />
 	<%
 		String root = request.getContextPath();	
@@ -20,54 +20,54 @@
 	%>
 	
 	<div class="px-4 py-5 my-5 text-center">
-		<h1 class="display-5 fw-bold text-body-emphasis">¹è¼Û Á¤º¸</h1>
+		<h1 class="display-5 fw-bold text-body-emphasis">ë°°ì†¡ ì •ë³´</h1>
 	</div>
 	
-	<!-- ¹è¼Û Á¤º¸ ÀÔ·Â -->
+	<!-- ë°°ì†¡ ì •ë³´ ìž…ë ¥ -->
 	<div class="container shop mb-5 p-4">
 		<form action="ship_pro.jsp" class="form-horizontal" method="post">
 			<input type="hidden" name="cartId" value="">
 			<div class="input-group mb-3 row">
-				<label class="input-group-text col-md-2" id="">¼º¸í</label>
-				<input type="text" class="form-control col-md-10" name="name">
+				<label class="input-group-text col-md-2" id="">ì„±ëª…</label>
+				<input type="text" class="form-control col-md-10" name="name" required>
 			</div>		
 			<div class="input-group mb-3 row">
-				<label class="input-group-text col-md-2" id="">¹è¼ÛÀÏ</label>
-				<input type="text" class="form-control col-md-10" name="shippingDate">
+				<label class="input-group-text col-md-2" id="">ë°°ì†¡ì¼</label>
+				<input type="text" class="form-control col-md-10" name="shippingDate" required>
 			</div>
 			<div class="input-group mb-3 row">
-				<label class="input-group-text col-md-2" id="">±¹°¡¸í</label>
-				<input type="text" class="form-control col-md-10" name="country">
+				<label class="input-group-text col-md-2" id="">êµ­ê°€ëª…</label>
+				<input type="text" class="form-control col-md-10" name="country" required>
 			</div>
 			<div class="input-group mb-3 row">
-				<label class="input-group-text col-md-2" id="">¿ìÆí¹øÈ£</label>
-				<input type="text" class="form-control col-md-10" name="zipCode">
+				<label class="input-group-text col-md-2" id="">ìš°íŽ¸ë²ˆí˜¸</label>
+				<input type="text" class="form-control col-md-10" name="zipCode" required>
 			</div>
 			<div class="input-group mb-3 row">
-				<label class="input-group-text col-md-2" id="">ÁÖ¼Ò</label>
-				<input type="text" class="form-control col-md-10" name="addressName">
+				<label class="input-group-text col-md-2" id="">ì£¼ì†Œ</label>
+				<input type="text" class="form-control col-md-10" name="addressName" required>
 			</div>
 			<div class="input-group mb-3 row">
-				<label class="input-group-text col-md-2" id="">ÀüÈ­¹øÈ£</label>
-				<input type="text" class="form-control col-md-10" name="phone">
+				<label class="input-group-text col-md-2" id="">ì „í™”ë²ˆí˜¸</label>
+				<input type="text" class="form-control col-md-10" name="phone" required>
 			</div>
 			
-			<!-- ¹öÆ° ¿µ¿ª -->
+			<!-- ë²„íŠ¼ ì˜ì—­ -->
 			<div class="d-flex justify-content-between mt-5 mb-5">
 				<div class="item">
-					<a href="cart.jsp" class="btn btn-lg btn-success">ÀÌÀü</a>
-					<!-- Ãë¼Ò ÇÁ·Î¼¼½º´Â ÀÌ¾î¼­... -->				
-					<a href="<%= root %>/index.jsp" class="btn btn-lg btn-danger">Ãë¼Ò</a>				
+					<a href="cart.jsp" class="btn btn-lg btn-success">ì´ì „</a>
+					<!-- ì·¨ì†Œ í”„ë¡œì„¸ìŠ¤ëŠ” ì´ì–´ì„œ... -->				
+					<a href="<%= root %>/index.jsp" class="btn btn-lg btn-danger">ì·¨ì†Œ</a>				
 				</div>
 				<div class="item">
-					<input type="submit" class="btn btn-lg btn-primary" value="µî·Ï">
+					<input type="submit" class="btn btn-lg btn-primary" value="ë“±ë¡">
 				</div>
 			</div>
 			
 		</form>
 	</div>
 	
-	<!-- ÇªÅÍ -->
+	<!-- í‘¸í„° -->
 	<jsp:include page="/layout/footer.jsp" />
 	<jsp:include page="/layout/script.jsp"/>
 </body>

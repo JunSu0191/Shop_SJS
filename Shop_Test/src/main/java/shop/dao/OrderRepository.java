@@ -48,8 +48,9 @@ public class OrderRepository extends JDBConnection {
      */
     public int lastOrderNo() {
         int lastOrderNo = 0;
-        String sql = "SELECT MAX(order_no) AS lastOrderNo FROM order";
-        
+        String sql = "SELECT MAX(order_no) AS lastOrderNo FROM `order`";
+
+        	
         try {
             PreparedStatement psmt = con.prepareStatement(sql);
             rs = psmt.executeQuery();
@@ -71,7 +72,13 @@ public class OrderRepository extends JDBConnection {
      */
     public List<Product> list(String userId) {
         List<Product> orderList = new ArrayList<>();
-        String sql = "SELECT * FROM product WHERE user_id = ?";
+        String sql = "SELECT pio.order_no AS order_no, p.name AS name, p.unit_price AS unit_price, "
+                + "pio.amount AS amount, "
+                + "(p.unit_price * pio.amount) AS total_price "
+                + "FROM `product_io` pio "
+                + "JOIN `order` o ON pio.order_no = o.order_no "
+                + "JOIN `product` p ON p.product_id = pio.product_id "
+                + "WHERE pio.user_id = ?";
         
         try {
             PreparedStatement psmt = con.prepareStatement(sql);
@@ -100,7 +107,13 @@ public class OrderRepository extends JDBConnection {
      */
     public List<Product> list(String phone, String orderPw) {
         List<Product> orderList = new ArrayList<>();
-        String sql = "SELECT * FROM order WHERE phone = ? AND order_pw = ?";
+        String sql = "SELECT pio.order_no AS order_no, p.name AS name, p.unit_price AS unit_price, "
+                + "pio.amount AS amount, "
+                + "(p.unit_price * pio.amount) AS total_price "
+                + "FROM `product_io` pio "
+                + "JOIN `order` o ON pio.order_no = o.order_no "
+                + "JOIN `product` p ON p.product_id = pio.product_id "
+                + "WHERE o.phone = ? AND o.order_pw = ?";
         
         try {
             PreparedStatement psmt = con.prepareStatement(sql);

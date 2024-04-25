@@ -1,7 +1,15 @@
 <%@page import="shop.dto.Order"%>
 <%@page import="shop.dao.OrderRepository"%>
 <%@page import="shop.dto.Ship"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>		
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>	
 <%
     // 폼으로부터 전달된 데이터 가져오기
     String name = request.getParameter("name");

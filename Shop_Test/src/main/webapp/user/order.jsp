@@ -15,23 +15,29 @@
     <jsp:include page="/layout/meta.jsp" /> <jsp:include page="/layout/link.jsp" />
 </head>
 <body>   
-    <% 
-        String root = request.getContextPath();
-	    String loginId = (String) session.getAttribute("loginId");
-        String phone = request.getParameter("phone");
+<% 
+    String root = request.getContextPath();
+    String loginId = (String) session.getAttribute("loginId");
+    String phone = request.getParameter("phone");
+    String orderPw = request.getParameter("orderPw"); // 주문 비밀번호 파라미터 추가
 
-        OrderRepository orderDAO = new OrderRepository();
-        Order order = new Order();
-        // ...
-        List<Product> orderList = (List<Product>) session.getAttribute("orderList");
+    OrderRepository orderDAO = new OrderRepository();
+    Order order = new Order();
+    List<Product> orderList = new ArrayList<>(); // 주문 내역을 담을 리스트 초기화
 
-        // 주문 내역 목록을 세션에서 가져오기
-        if (orderList == null) {
-            orderList = new ArrayList<>(); // 초기화
-            session.setAttribute("orderList", orderList);
-        }
-    %>
-    
+    // 회원인 경우
+    if (loginId != null) {
+        // 회원의 주문 내역을 조회
+        orderList = orderDAO.list(loginId);
+    } else if (phone != null && !phone.isEmpty()) {
+        // 비회원인 경우, 전화번호와 주문 비밀번호를 기반으로 주문 내역을 조회
+        orderList = orderDAO.list(phone, orderPw);
+    }
+
+    // 조회된 주문 내역을 세션에 저장
+    session.setAttribute("orderList", orderList);
+%>
+
     <jsp:include page="/layout/header.jsp" />
     
     <div class="row m-0 mypage">
@@ -97,7 +103,7 @@
                         </div>
                     <% } %>
                     </form>
-                <% if( loginId != null || loginId == null || ( phone != null && !phone.isEmpty() ) ) { %>
+                <% if( loginId != null || ( phone != null && !phone.isEmpty() ) ) { %>
                 <!-- 주문 내역 목록 -->
                 <table class="table table-striped table-hover table-bordered text-center align-middle">
                     <thead>

@@ -25,6 +25,9 @@
 	String userId = request.getParameter("loginId");
 
 	
+	// OrderRepository를 이용하여 최근 주문번호를 가져옴
+	OrderRepository orderDAO = new OrderRepository();
+	int lastOrderNo = orderDAO.lastOrderNo();
 	
 	Order order = new Order();
 	order.setUserId(userId);
@@ -36,11 +39,15 @@
     order.setZipCode(orderPro.getZipCode());
     order.setAddress(orderPro.getAddress());
     order.setPhone(orderPro.getPhone());
+	// 최근 주문번호 설정
+	order.setOrderNo(lastOrderNo + 1);
 	
-	OrderRepository orderDAO = new OrderRepository();
+	// 새로운 주문 정보를 데이터베이스에 추가
 	int result = orderDAO.insert(order);
 	String root = request.getContextPath();
 	
+	// 주문 완료 후 장바구니 비우기
+	session.removeAttribute("cartList");
 %>
 	<div class="px-4 py-5 my-5 text-center">
 		<h1 class="display-5 fw-bold text-body-emphasis">주문 완료</h1>
