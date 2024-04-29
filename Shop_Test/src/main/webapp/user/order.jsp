@@ -15,52 +15,63 @@
     <jsp:include page="/layout/meta.jsp" /> <jsp:include page="/layout/link.jsp" />
 </head>
 <body>   
-<% 
-    String root = request.getContextPath();
-    String loginId = (String) session.getAttribute("loginId");
-    String phone = request.getParameter("phone");
-    String orderPw = request.getParameter("orderPw"); // 주문 비밀번호 파라미터 추가
+    <%
+    	
+        // 주문 내역 목록 새로 만들기
+        OrderRepository orderDAO = new OrderRepository();
+        Order order = new Order();
+        List<Product> orderList = new ArrayList<>(); 
+    
+        // 회원
+        String userId = (String) session.getAttribute("loginId");
+        // 비회원
+        String phone = (String) session.getAttribute("phone");
+        String orderPw = (String) session.getAttribute("orderPw");
+        System.out.println("orderPw : " + orderPw);
+        System.out.println("phone : " + phone);
+        
 
-    OrderRepository orderDAO = new OrderRepository();
-    Order order = new Order();
-    List<Product> orderList = new ArrayList<>(); // 주문 내역을 담을 리스트 초기화
+        
+        // 회원인 경우
+        if (userId != null) {
+            orderList = orderDAO.list(userId);
+        }
+        else {
+            // 비회원인 경우, 전화번호와 주문 비밀번호를 기반으로 주문 내역을 조회
+            orderList = orderDAO.list(phone, orderPw);
+        }
+        // 조회된 주문 내역을 세션에 저장
+        session.setAttribute("orderList", orderList);
 
-    // 회원인 경우
-    if (loginId != null) {
-        // 회원의 주문 내역을 조회
-        orderList = orderDAO.list(loginId);
-    } else if (phone != null && !phone.isEmpty()) {
-        // 비회원인 경우, 전화번호와 주문 비밀번호를 기반으로 주문 내역을 조회
-        orderList = orderDAO.list(phone, orderPw);
-    }
+        String root = request.getContextPath();
 
-    // 조회된 주문 내역을 세션에 저장
-    session.setAttribute("orderList", orderList);
-%>
+        // 로그인 여부 확인
+        boolean login = userId != null;
+    %>
 
     <jsp:include page="/layout/header.jsp" />
-    
+
     <div class="row m-0 mypage">
         <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
             <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary">
                 <ul class="nav nav-pills flex-column mb-auto">
                     <!-- 로그인 시 -->
-                    <% if( loginId != null ) { %>
+                    <% if( login ) { %>
                     <li class="nav-item">
                         <a href="<%= root %>/user/index.jsp" class="nav-link link-body-emphasis">
-                            마이 페이지
+                          마이 페이지
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="<%= root %>/user/update.jsp" class="nav-link link-body-emphasis">
-                            회원정보 수정
+                          회원정보 수정
                         </a>
                     </li>
                     <% }  %>
                     
                     <li>
                         <a href="#" class="nav-link active" aria-current="page" >
-                            주문내역
+                          주문내역
                         </a>
                     </li>
                 </ul>
@@ -68,11 +79,12 @@
               </div>
         </div>
         
+        <!-- 비회원 -->
         <div class="col-md-9 ms-sm-auto col-lg-10 p-0 m-0">
             <div class="px-4 py-3 my-3 text-center">
                 <h1 class="display-5 fw-bold text-body-emphasis">주문 내역</h1>
                 <div class="col-lg-6 mx-auto">
-                    <% if( loginId == null) { %>    
+                    <% if( !login ) { %>    
                         <p class="lead mb-4">비회원 주문하신 경우, 전화번호와 주문 비밀번호를 입력해주세요.</p>
                     <% } %>
                 </div>
@@ -81,7 +93,7 @@
             <!-- 주문 내역 영역 -->
             <div class="container shop m-auto mb-5">
                     <form action="<%= root %>/user/order_pro.jsp" method="post">
-                    <% if( loginId == null ) { %>
+                    <% if( !login ) { %>
                         <div class="mb-5">
                             <table class="table">
                                 <tr>
@@ -103,7 +115,7 @@
                         </div>
                     <% } %>
                     </form>
-                <% if( loginId != null || ( phone != null && !phone.isEmpty() ) ) { %>
+                <% if( login || ( phone != null && !phone.isEmpty() ) ) { %>
                 <!-- 주문 내역 목록 -->
                 <table class="table table-striped table-hover table-bordered text-center align-middle">
                     <thead>
@@ -117,7 +129,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%
+                        <% 
                             int sum = 0;
                             for(int i = 0 ; i < orderList.size() ; i++) {
                                 Product product = orderList.get(i);
@@ -125,21 +137,17 @@
                                 sum += total;
                         %>
                         <tr>
-                            <td><%= product.getOrderNo() %></td>           
-                            <td><%= product.getName() %></td>            
-                            <td><%= product.getUnitPrice() %></td>            
-                            <td><%= product.getQuantity() %></td>            
-                            <td><%= total %></td>            
-                            <td></td>            
+                            <td><%= product.getOrderNo() %></td>         
+                            <td><%= product.getName() %></td>         
+                            <td><%= product.getUnitPrice() %></td>         
+                            <td><%= product.getQuantity() %></td>         
+                            <td><%= total %></td>         
+                            <td></td>         
                         </tr>
-                        <%
-                            }
-                        %>
+                        <% } %>
                     </tbody>
                     <tfoot>
-                        <%
-                            if( orderList.isEmpty() ) {
-                        %>
+                        <% if( orderList.isEmpty() ) { %>
                         <tr>
                             <td colspan="6">추가된 상품이 없습니다.</td>    
                         </tr>
@@ -147,13 +155,12 @@
                         <tr>
                             <td></td>
                             <td></td>
+                            <td></td>
                             <td>총액</td>
                             <td id="cart-sum"><%= sum %></td>
                             <td></td>
                         </tr>
-                        <%
-                            }
-                        %>
+                        <% } %>
                     </tfoot>
                 </table>
                 
@@ -163,7 +170,6 @@
             <jsp:include page="/layout/footer.jsp" />
         </div>
     </div>
-    
     
     
     <jsp:include page="/layout/script.jsp" />
@@ -178,8 +184,8 @@
         let radioFemale = document.getElementById('gender-female')
         let radioMale = document.getElementById('gender-male')
         // alert(tempGender.value)
-        if( tempGender.value == '남' )        radioMale.checked = true
-        if( tempGender.value == '여' )        radioFemale.checked = true
+        if( tempGender.value == '남' )     radioMale.checked = true
+        if( tempGender.value == '여' )     radioFemale.checked = true
         
         
         // 생일 월 (select) 선택
